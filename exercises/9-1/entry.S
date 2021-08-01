@@ -101,10 +101,6 @@ switch_to:
 	mv	t6, a0
 	reg_restore t6
 	
-	# 如果是第一次调用函数，需要传递参数a0
-	beqz a1, 2f
-	mv a0, a2
-2:
 	# Do actual context switching.
 	ret
 

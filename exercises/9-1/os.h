@@ -53,8 +53,6 @@ struct context {
 	reg_t t4;
 	reg_t t5;
 	reg_t t6;
-	void* param;
-	int is_first_call;
 };
 
 extern int  task_create(void (*task)(void*), void*);

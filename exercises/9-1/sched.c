@@ -1,7 +1,7 @@
 #include "os.h"
 
 /* defined in entry.S */
-extern void switch_to(struct context *next, int is_first_call, void* param);
+extern void switch_to(struct context *next);
 
 #define MAX_TASKS 10
 #define STACK_SIZE 1024
@@ -37,9 +37,7 @@ void schedule()
 
 	_current = (_current + 1) % _top;
 	struct context *next = &(ctx_tasks[_current]);
-	int is_first_call = next->is_first_call;
-	next->is_first_call = 0;
-	switch_to(next, is_first_call, next->param);
+	switch_to(next);
 }
 
 /*
@@ -56,8 +54,7 @@ int task_create(void (*start_routin)(void*), void* param)
 		struct context* ctx = &(ctx_tasks[_top]);
 		ctx->sp = (reg_t) &task_stack[_top][STACK_SIZE - 1];
 		ctx->ra = (reg_t) start_routin;
-		ctx->param = param;
-		ctx->is_first_call = 1;
+		ctx->a0 = param;
 		_top++;
 		return 0;
 	} else {
