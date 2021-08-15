@@ -53,9 +53,16 @@ struct context {
 	reg_t t4;
 	reg_t t5;
 	reg_t t6;
+	uint8_t priority;
 };
 
-extern int  task_create(void (*task)(void*), void*);
+struct Node {
+	struct context* data;
+	struct Node* next;
+	int is_used;
+};
+
+extern int  task_create(void (*task)(void*), void*, uint8_t);
 extern void task_delay(volatile int count);
 extern void task_yield();
 

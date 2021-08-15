@@ -38,8 +38,8 @@ void user_task2(void* param)
 /* NOTICE: DON'T LOOP INFINITELY IN main() */
 void os_main(void)
 {
-	task_create(user_task0, "task0_param");
-	task_create(user_task1, "task1_param");
-	task_create(user_task2, "task2_param");
+	task_create(user_task0, "task0_param\n", 1);
+	task_create(user_task1, "task1_param\n", 0);
+	task_create(user_task2, "task2_param\n", 2);
 }
 
